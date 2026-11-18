@@ -16,8 +16,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and
 ## Rules
 
 - **Version.** `0.0.x`, moving by exactly `0.0.1`, in lockstep with the
-  jspassgen suite; never propose a jump. The first version is 0.0.22, the
-  planned first suite release. The version lives in `package.json` and is
+  jspassgen suite; never propose a jump. The first version was 0.0.22, the
+  first suite release. The version lives in `package.json` and is
   restated in `package-lock.json`, `CITATION.cff`, `CHANGELOG.md`, and the
   SECURITY and SUPPORT tables; move them together. Work for the next
   version happens on `feat/v<next-version>`; every other branch,
