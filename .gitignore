@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+# Dependencies and coverage
+node_modules/
+coverage/
+.nyc_output/
+# npm pack output
+*.tgz
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/sebastienrousseau/jspassgen-mcp/blob/main/README.md
+    about: Read the README before opening an issue.
+  - name: Contributing Guide
+    url: https://github.com/sebastienrousseau/jspassgen-mcp/blob/main/CONTRIBUTING.md
+    about: Follow contribution and review expectations.
+  - name: Password generation behaviour
+    url: https://github.com/sebastienrousseau/jspassgen/issues
+    about: How a password is generated, its alphabet or its entropy belongs to jspassgen.

@@ -1,0 +1,97 @@
+{
+  "name": "@sebastienrousseau/jspassgen-mcp",
+  "version": "0.0.22",
+  "private": true,
+  "description": "Local stdio Model Context Protocol server that generates passwords with @sebastienrousseau/jspassgen. Secrets go to the local client only and are never logged.",
+  "author": "Sebastien Rousseau <sebastienrousseau@users.noreply.github.com>",
+  "license": "Apache-2.0 OR MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "jspassgen-mcp": "./bin/jspassgen-mcp.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "LICENSE-APACHE",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "test": "c8 mocha",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "complexity": "node scripts/halstead.mjs bin src test scripts examples",
+    "audit": "npm audit --audit-level=low",
+    "check": "npm run lint && npm run format:check && npm run complexity && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@sebastienrousseau/jspassgen": "0.0.20",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "c8": "12.0.0",
+    "eslint": "10.15.0",
+    "eslint-plugin-sonarjs": "4.2.2",
+    "espree": "11.2.0",
+    "globals": "17.14.0",
+    "mocha": "12.0.3",
+    "prettier": "3.10.1"
+  },
+  "overrides": {
+    "glob": "^14.0.2",
+    "minimatch": "^11.0.1"
+  },
+  "c8": {
+    "all": true,
+    "include": [
+      "src/**",
+      "bin/**"
+    ],
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100,
+    "statements": 100,
+    "reporter": [
+      "text",
+      "lcov"
+    ]
+  },
+  "mocha": {
+    "spec": [
+      "test/**/*.test.js"
+    ],
+    "timeout": 20000
+  },
+  "homepage": "https://github.com/sebastienrousseau/jspassgen-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastienrousseau/jspassgen-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sebastienrousseau/jspassgen-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "password",
+    "password-generator",
+    "jspassgen",
+    "csprng"
+  ]
+}

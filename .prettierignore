@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+coverage/
+node_modules/
+package-lock.json
+CHANGELOG.md
+LICENSE-*
+LICENSES/
+KEYS.asc
+DCO.txt
+*.md
