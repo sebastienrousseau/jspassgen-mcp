@@ -60,8 +60,7 @@
 ## Development version
 
 This branch prepares unreleased v0.0.22, the first version of
-jspassgen-mcp. It is not on npm yet (`package.json` is marked `private`);
-run it from a checkout until it ships with the suite's first lockstep
+jspassgen-mcp. It is not on npm yet; run it from a checkout until it ships with the suite's first lockstep
 release.
 
 ---
@@ -200,7 +199,7 @@ stdio.
 - The output is the password as text, and structured content with
   `password`, `length`, `entropyBits` and `securityLevel` as jspassgen
   computes them.
-- Every password comes from `@sebastienrousseau/jspassgen` 0.0.20 (pinned
+- Every password comes from `@sebastienrousseau/jspassgen` 0.0.21 (pinned
   exactly in `package.json`), type `strong`, drawn from Node.js `crypto`.
   The server has no generation logic of its own.
 - Invalid input is refused, not corrected: a non-integer, a string,

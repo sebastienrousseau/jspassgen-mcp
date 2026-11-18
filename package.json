@@ -1,7 +1,6 @@
 {
   "name": "@sebastienrousseau/jspassgen-mcp",
   "version": "0.0.22",
-  "private": true,
   "description": "Local stdio Model Context Protocol server that generates passwords with @sebastienrousseau/jspassgen. Secrets go to the local client only and are never logged.",
   "author": "Sebastien Rousseau <sebastienrousseau@users.noreply.github.com>",
   "license": "Apache-2.0 OR MIT",
@@ -34,7 +33,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2",
-    "@sebastienrousseau/jspassgen": "0.0.20",
+    "@sebastienrousseau/jspassgen": "0.0.21",
     "zod": "4.6.7"
   },
   "devDependencies": {

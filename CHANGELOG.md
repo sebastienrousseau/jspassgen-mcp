@@ -16,7 +16,7 @@ suite release. Not published to npm.
 - A stdio MCP server (`bin/jspassgen-mcp.js`) on
   `@modelcontextprotocol/sdk` 1.32.2, with one tool, `generate_password`:
   a base64-alphabet password of 1 to 1024 characters from
-  `@sebastienrousseau/jspassgen` 0.0.20, with jspassgen's entropy
+  `@sebastienrousseau/jspassgen` 0.0.21, with jspassgen's entropy
   estimate. The length bounds are read from jspassgen.
 - Tests over an in-memory transport and over real stdio, at 100%
   coverage; the stdio test fails on any output outside the protocol.

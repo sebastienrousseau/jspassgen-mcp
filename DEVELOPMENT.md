@@ -65,9 +65,9 @@ there is no offender: any function over a ceiling fails the gate.
 
 ## Release model
 
-Not wired yet, on purpose. The package stays `private: true` and the
-repository has no release or publish workflow until the first jspassgen
-suite release (ADR 0001, section 6). When it is added, it will follow
+Not wired yet, on purpose. `private: true` was removed for the first
+jspassgen suite release, 0.0.22, but the repository has no release or
+publish workflow until that release (ADR 0001, section 6). When it is added, it will follow
 the suite: a signed annotated `v<version>` tag with the message
 `jspassgen-mcp v<version>`, a GitHub release titled
 `jspassgen-mcp <version>` with `SHA256SUMS`, and npm trusted publishing
