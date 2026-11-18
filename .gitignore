@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+# Dependencies and coverage
+node_modules/
+coverage/
+.nyc_output/
+# npm pack output
+*.tgz
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+# bin/ holds the server's executable, which is source here: keep it
+# tracked even where a global ignore excludes bin/ directories.
+!/bin/

@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+cff-version: 1.2.0
+message: "If you use jspassgen-mcp in research or production write-ups, please cite it as below."
+type: software
+title: "jspassgen-mcp: a local stdio MCP server for jspassgen"
+abstract: >-
+  A local Model Context Protocol server that lets AI assistants generate
+  passwords with jspassgen over stdio, from the operating system's
+  CSPRNG, without logging the result. It adds no generation logic of its
+  own.
+authors:
+  - family-names: Rousseau
+    given-names: Sebastien
+version: "0.0.22"
+# Dual-licensed, at the user's option (LICENSE-APACHE, LICENSE-MIT).
+license:
+  - Apache-2.0
+  - MIT
+repository-code: "https://github.com/sebastienrousseau/jspassgen-mcp"
+url: "https://jspassgen.com"
+keywords:
+  - password
+  - password-generator
+  - mcp
+  - model-context-protocol
+  - csprng
+  - JavaScript

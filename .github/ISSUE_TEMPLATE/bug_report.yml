@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+name: Bug Report
+description: Report a reproducible problem in jspassgen-mcp
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Never paste a password you use. Report
+        security problems privately, as SECURITY.md describes.
+  - type: input
+    id: version
+    attributes:
+      label: jspassgen-mcp version or commit
+      placeholder: "0.0.22"
+    validations:
+      required: true
+  - type: input
+    id: toolchain
+    attributes:
+      label: Node.js version and MCP client
+      placeholder: "Node.js 24.11.0, Claude Desktop 1.2.3"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal Reproducible Example
+      description: The tool call (name and arguments) and how the client was configured.
+    validations:
+      required: true
+  - type: textarea
+    id: error_output
+    attributes:
+      label: Error Output
+      description: The tool error text or the client's log, with any generated password removed.
+    validations:
+      required: true
