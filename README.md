@@ -7,16 +7,16 @@
 <h1 align="center">jspassgen-mcp</h1>
 
 <p align="center">
-  A local stdio Model Context Protocol server that lets AI assistants generate passwords with jspassgen, on your machine, from the operating system's CSPRNG, with nothing logged.
+  A local stdio Model Context Protocol server that lets an AI assistant generate passwords with jspassgen on your machine, from Node.js <code>crypto</code>, with nothing logged.
 </p>
 
 <p align="center">
   <a href="https://github.com/sebastienrousseau/jspassgen-mcp/actions"><img src="https://img.shields.io/github/actions/workflow/status/sebastienrousseau/jspassgen-mcp/ci.yml?style=for-the-badge&logo=github" alt="Build" height="28" /></a>
-  <a href="https://www.npmjs.com/package/@sebastienrousseau/jspassgen-mcp"><img src="https://img.shields.io/npm/v/@sebastienrousseau/jspassgen-mcp?style=for-the-badge&color=fc8d62&logo=npm" alt="npm (not published yet)" height="28" /></a>
-  <a href="https://github.com/sebastienrousseau/jspassgen-mcp#documentation"><img src="https://img.shields.io/badge/docs-readme-blue?style=for-the-badge&labelColor=555555&logo=readthedocs" alt="Docs" height="28" /></a>
+  <a href="https://www.npmjs.com/package/@sebastienrousseau/jspassgen-mcp"><img src="https://img.shields.io/badge/npm-not%20published%20yet-lightgrey?style=for-the-badge&color=fc8d62&logo=npm" alt="npm: not published yet" height="28" /></a>
+  <a href="https://github.com/sebastienrousseau/jspassgen-mcp/blob/main/DEVELOPMENT.md"><img src="https://img.shields.io/badge/docs-development-blue?style=for-the-badge&labelColor=555555&logo=readthedocs" alt="Docs" height="28" /></a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/sebastienrousseau/jspassgen-mcp"><img src="https://img.shields.io/ossf-scorecard/github.com/sebastienrousseau/jspassgen-mcp?style=for-the-badge&label=OpenSSF%20Scorecard&logo=openssf" alt="OpenSSF Scorecard" height="28" /></a>
   <a href="LICENSE-APACHE"><img src="https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg?style=for-the-badge" alt="License: Apache-2.0 OR MIT" height="28" /></a>
-  <a href="https://github.com/sebastienrousseau/jspassgen-mcp#requirements"><img src="https://img.shields.io/badge/Node.js-22%2B-93450a.svg?style=for-the-badge&logo=node.js" alt="Node.js 22 or newer" height="28" /></a>
+  <a href="#requirements"><img src="https://img.shields.io/badge/Node.js-22%2B-93450a.svg?style=for-the-badge&logo=node.js" alt="Node.js 22 or newer" height="28" /></a>
 </p>
 
 <p align="center">
@@ -29,31 +29,40 @@
 
 **Getting started**
 
-- [Install](#install): from a clone today; npm after the first suite release
-- [Requirements](#requirements): Node.js floor, platforms
+- [Install](#install): from a checkout; not on npm yet
+- [Requirements](#requirements): Node.js floor, platforms, MCP client
 - [Quick Start](#quick-start): register the server with an MCP client
 
 **The jspassgen ecosystem**
 
-- [The jspassgen ecosystem](#the-jspassgen-ecosystem): the core, its tools, SDKs and site
+- [The jspassgen ecosystem](#the-jspassgen-ecosystem): the core library, its tools and native SDKs, released in lockstep
 
 **Library reference**
 
-- [Capabilities at a glance](#capabilities-at-a-glance): what the server exposes today
-- [Ecosystem comparison](#ecosystem-comparison): not published yet
-- [Benchmarks](#benchmarks): not measured yet
-- [Features](#features): the tool and its guarantees
-- [Configuration](#configuration): none yet
+- [Capabilities at a glance](#capabilities-at-a-glance): what the server exposes today, and what it does not yet
+- [Ecosystem comparison](#ecosystem-comparison): none published yet, and why
+- [Benchmarks](#benchmarks): none yet, and why
+- [Features](#features): the `generate_password` tool
+- [Configuration](#configuration): nothing to configure yet
 - [Examples](#examples): runnable example index
 
 **Operational**
 
-- [When not to use jspassgen](#when-not-to-use-jspassgen): limitations
-- [Development](#development): make targets, CI
-- [Security](#security): guarantees and reporting
+- [When not to use jspassgen-mcp](#when-not-to-use-jspassgen-mcp): limitations
+- [Development](#development): make targets and CI
+- [Security](#security): transport, logging, randomness and supply chain
 - [Documentation](#documentation): all reference docs
-- [Stability guarantees](#stability-guarantees): version axis, output stability, toolchain discipline
+- [Stability guarantees](#stability-guarantees): version axis, tool contract, toolchain floor
 - [License](#license)
+
+---
+
+## Development version
+
+This branch prepares unreleased v0.0.22, the first version of
+jspassgen-mcp. It is not on npm yet (`package.json` is marked `private`);
+run it from a checkout until it ships with the suite's first lockstep
+release.
 
 ---
 
@@ -61,28 +70,35 @@
 
 ### As a JavaScript library
 
-```sh
+jspassgen-mcp is an MCP server, not a library for applications. Programs
+that need passwords should depend on
+[`@sebastienrousseau/jspassgen`](https://www.npmjs.com/package/@sebastienrousseau/jspassgen)
+directly.
+
+Run the server from a checkout:
+
+```bash
 git clone https://github.com/sebastienrousseau/jspassgen-mcp.git
 cd jspassgen-mcp
 npm ci
 ```
 
-jspassgen-mcp is a planned member of the jspassgen suite and is **not on
-npm yet**: `package.json` is marked `private` until the first suite
-release, planned as 0.0.22. Until then, run it from a clone as above.
-Once published, it will install with
-`npm install @sebastienrousseau/jspassgen-mcp`.
+Once the suite's first lockstep release publishes it, it will install
+with `npm install @sebastienrousseau/jspassgen-mcp`.
 
 ---
 
 ## Requirements
 
-- **Node.js 22 or newer** (`engines` in `package.json`; CI tests 22 and
-  24).
+- Node.js 22 or newer (`engines` in `package.json`, enforced by `.npmrc`).
 - Any platform Node.js supports. Randomness comes from Node.js `crypto`
   through jspassgen's `NodeCryptoRandom` adapter.
 - An MCP client that can start a local server over stdio.
 - No network access at run time.
+
+| Component | Minimum toolchain | Enforcement |
+| :--- | :---: | :--- |
+| `jspassgen-mcp` | Node.js 22 | `engines` with `engine-strict`; CI tests Node.js 22 and 24 |
 
 ---
 
@@ -100,30 +116,41 @@ Once published, it will install with
 ```
 
 Add this entry to your MCP client's server configuration, with the path
-of your clone. The client starts the server as a child process and talks
-to it over stdin and stdout; ask it for a password and it calls
-`generate_password`. To try it without a client:
+of your checkout. The client starts the server as a child process and
+talks to it over stdin and stdout; ask it for a password and it calls
+`generate_password`. To try the server without a client, run
 `node examples/generate-password.mjs 24`.
 
 ---
 
 ## The jspassgen ecosystem
 
-jspassgen is one suite of repositories that release the same version
-([ADR 0001](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/adr/0001-ecosystem-lockstep.md),
-inventory in
-[`docs/ecosystem.json`](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/ecosystem.json)).
-Only the core is released today; every other member, this one included,
-is planned.
+jspassgen is one core library and the tools, SDKs and site around it.
+Every member is listed in
+[`docs/ecosystem.json`](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/ecosystem.json)
+and, from the suite's first lockstep release, every member ships the same
+version ([ADR 0001](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/adr/0001-ecosystem-lockstep.md)).
+The JavaScript tools depend on the core and add no generation logic of
+their own; each SDK is a native port that is checked against the core's
+conformance kit as its generators land.
 
 | Component | Purpose | Use case |
 | :--- | :--- | :--- |
-| [jspassgen](https://github.com/sebastienrousseau/jspassgen) | The zero-dependency core, Node.js library, web UI and workers (released) | Generate passwords in JavaScript |
-| jspassgen-cli | Command-line generator on the core (planned) | Generate passwords in a terminal |
-| **jspassgen-mcp** | This server: the core as MCP tools over stdio (planned) | Let an AI assistant generate a password locally |
-| jspassgen-lsp | Language server flagging weak literal secrets (planned) | Catch weak secrets in configuration files |
-| jspassgen-sdk-python, -rust, -java, -dotnet, -cpp | Native ports of the core, proven by a conformance kit (planned) | The same rules outside JavaScript |
-| jspassgen.github.io | jspassgen.com (planned as a suite member) | Product site |
+| [`jspassgen`](https://github.com/sebastienrousseau/jspassgen) | Password and passphrase core, Node.js library, CLI, web UI and workers; source of the conformance kit | Programs that generate secrets |
+| [`jspassgen-cli`](https://github.com/sebastienrousseau/jspassgen-cli) | Command-line generator built on the core | Passwords in a terminal or a script |
+| **`jspassgen-mcp`** | Local stdio MCP server | AI agents that need a generated secret |
+| [`jspassgen-lsp`](https://github.com/sebastienrousseau/jspassgen-lsp) | Language server for weak literal secrets | Editors checking configuration and `.env` files |
+| [`jspassgen-sdk-python`](https://github.com/sebastienrousseau/jspassgen-sdk-python) | Native port on the `secrets` module | Python programs |
+| [`jspassgen-sdk-rust`](https://github.com/sebastienrousseau/jspassgen-sdk-rust) | Native port on the OS CSPRNG | Rust programs |
+| [`jspassgen-sdk-java`](https://github.com/sebastienrousseau/jspassgen-sdk-java) | Native port on `SecureRandom` | JVM programs |
+| [`jspassgen-sdk-dotnet`](https://github.com/sebastienrousseau/jspassgen-sdk-dotnet) | Native port on `RandomNumberGenerator` | .NET programs |
+| [`jspassgen-sdk-cpp`](https://github.com/sebastienrousseau/jspassgen-sdk-cpp) | Native C++17 port on the OS CSPRNG | C++ programs |
+| [`jspassgen.github.io`](https://github.com/sebastienrousseau/jspassgen.github.io) | Source of [jspassgen.com](https://jspassgen.com) | Evaluating the suite |
+
+Only `@sebastienrousseau/jspassgen` is on a package registry so far
+(0.0.21 on npm). The table gives each member's purpose; the other members
+are early, each README's Capabilities at a glance says what works today,
+and they first publish with the suite's first lockstep release.
 
 ---
 
@@ -132,44 +159,58 @@ is planned.
 | Area | Capability | Status |
 | :--- | :--- | :--- |
 | Tools | `generate_password`: a base64-alphabet password of 1 to 1024 characters | Available |
+| Tools | Entropy estimate of the generated password | Available, returned with each password |
 | Tools | Passphrase generation | Not available yet |
-| Tools | Entropy estimate for a configuration | Not available yet (the entropy of a generated password is returned) |
+| Tools | Entropy estimate for a configuration | Not available yet |
 | Tools | Strength analysis of an existing password | Not available yet |
 | Transport | stdio, local | Available |
 | Transport | HTTP or any remote transport | Not planned |
+
+ADR 0001 plans the passphrase, entropy and strength tools; only
+`generate_password` exists so far.
 
 ---
 
 ## Ecosystem comparison
 
 No comparison is published yet. A comparison with other MCP password
-tools will be added only with evidence behind each claim.
+servers will be added only with evidence behind each claim. Within the
+suite, the difference is the interface: this server returns the same
+`strong` passwords as `@sebastienrousseau/jspassgen`, through an MCP tool
+call instead of a JavaScript import.
 
 ---
 
 ## Benchmarks
 
-Not measured yet. Generation time is jspassgen's; this server adds one
-MCP round trip over stdio.
+None are published yet, and the repository has no benchmark command.
+Generation time is jspassgen's; this server adds one MCP round trip over
+stdio.
 
 ---
 
 ## Features
 
-- **One tool, `generate_password`.** Input: `length`, an integer from 1
-  to 1024, optional (jspassgen's default of 16 applies when it is
-  omitted). The bounds are read from jspassgen's
-  `PASSWORD_TYPE_METADATA`, so they cannot drift from the core, and are
-  advertised in the tool's JSON Schema. Output: the password as text, and
-  structured content with `password`, `length`, `entropyBits` and
-  `securityLevel` as jspassgen computes them.
-- **No generation logic of its own.** Every password comes from
-  `@sebastienrousseau/jspassgen` 0.0.20 (pinned exactly), type `strong`,
-  drawn from Node.js `crypto`.
-- **Invalid input is refused**, not corrected: a non-integer, zero,
-  negative or over-limit length returns a tool error naming `length`.
-- **Tool annotations** tell clients the tool is read-only,
-  non-destructive and closed-world.
+- One tool, `generate_password`. Its only input is `length`, an optional
+  integer from 1 to 1024; jspassgen's default of 16 applies when it is
+  omitted.
+- The bounds are read from jspassgen's `PASSWORD_TYPE_METADATA`, so they
+  cannot drift from the core, and are advertised in the tool's JSON
+  Schema.
+- The output is the password as text, and structured content with
+  `password`, `length`, `entropyBits` and `securityLevel` as jspassgen
+  computes them.
+- Every password comes from `@sebastienrousseau/jspassgen` 0.0.20 (pinned
+  exactly in `package.json`), type `strong`, drawn from Node.js `crypto`.
+  The server has no generation logic of its own.
+- Invalid input is refused, not corrected: a non-integer, a string,
+  `null`, zero, a negative or an over-limit length returns a tool error
+  naming `length`.
+- Tool annotations tell clients the tool is read-only, non-destructive
+  and closed-world.
+- `src/index.js` exports `createServer`, `TOOL_NAME`, `LENGTH_LIMITS`,
+  `PASSWORD_TYPE` and `createGeneratePasswordHandler`, so the server can
+  be connected to another MCP transport.
 
 ---
 
@@ -177,7 +218,8 @@ MCP round trip over stdio.
 
 There is nothing to configure yet: no environment variables, flags or
 files. The server reads nothing and writes nothing outside the MCP
-messages on stdin and stdout.
+messages on stdin and stdout. The `length` argument of each call is the
+only option.
 
 ---
 
@@ -187,25 +229,25 @@ messages on stdin and stdout.
 | :--- | :--- | :--- |
 | [`examples/generate-password.mjs`](examples/generate-password.mjs) | An MCP client that starts the server over stdio, lists its tools and calls `generate_password` | `node examples/generate-password.mjs [length]` |
 
-CI runs the example on every push.
+`make examples` runs it, and CI runs it on Node.js 22 and 24.
 
 ---
 
-## When not to use jspassgen
+## When not to use jspassgen-mcp
 
-- **You need a password manager.** The server generates; it does not
-  store, sync or fill anything.
-- **You need a remote or shared server.** It speaks stdio only, to the
-  one client that started it. There is no HTTP transport.
-- **You need passphrases, entropy estimates for a configuration or
-  strength analysis today.** The ADR plans those tools; only
-  `generate_password` exists so far.
-- **You need it from npm today.** It is not published until the first
-  suite release.
-- **You do not want the password in the AI conversation.** The password
-  is returned to the MCP client, which shows it to the model and may keep
-  it in the conversation history. That is inherent to calling a tool;
-  generate locally with jspassgen instead.
+- Use a password manager if you need to store, sync or fill passwords.
+  This server only generates them.
+- Use another server if you need a remote or shared one. This one speaks
+  stdio only, to the one client that started it, and has no HTTP
+  transport.
+- Wait for a later release if you need passphrases, entropy estimates for
+  a configuration or strength analysis today. Only `generate_password`
+  exists so far.
+- Run it from a checkout if you need it today. It is not on npm until the
+  suite's first lockstep release.
+- Generate locally with jspassgen if the password must not enter the AI
+  conversation. The MCP client shows the result to the model and may keep
+  it in the conversation history; that is inherent to calling a tool.
 
 ---
 
@@ -216,55 +258,68 @@ mise install     # Node.js 24 (mise.toml)
 make install     # npm ci
 make check       # ESLint, Prettier, Halstead, tests at 100% coverage, the example, the README check
 make audit       # npm audit
+make pack        # list what npm would publish
+make demo        # render .github/demo.gif with vhs
 ```
 
-[DEVELOPMENT.md](DEVELOPMENT.md) lists every CI gate and its local
-command; [CONTRIBUTING.md](CONTRIBUTING.md) the rules for a change.
+CI runs ESLint (cyclomatic 10, cognitive 15, 60 lines per function, 500
+per file), Prettier, Halstead difficulty 30, npm audit, the tests at
+100% statements, branches, functions and lines on Node.js 22 and 24, the
+example over stdio, the npm tarball listing, markdownlint, codespell,
+REUSE, link checks, CodeQL, DCO and OpenSSF Scorecard.
+[`DEVELOPMENT.md`](DEVELOPMENT.md) maps every CI gate to its local
+command; [`CONTRIBUTING.md`](CONTRIBUTING.md) sets the rules for a change.
 
 ---
 
 ## Security
 
-- **Local only.** stdio transport, no listening socket, no network call,
-  no telemetry.
-- **Nothing logged.** The process writes the MCP protocol to stdout and
-  nothing to stderr; a test fails if anything else appears on either. A
-  generated password goes to the calling client only.
-- **CSPRNG.** Randomness comes from Node.js `crypto` through jspassgen;
-  this server adds none of its own.
-- **Supply chain.** Dependencies are locked in `package-lock.json`, the
-  runtime ones pinned exactly; npm audit, CodeQL, OpenSSF Scorecard and
-  Dependabot run in CI, and every workflow action is pinned by commit SHA.
+Report vulnerabilities privately according to [`SECURITY.md`](SECURITY.md).
 
-Report vulnerabilities according to [`SECURITY.md`](SECURITY.md).
+The server is local only: stdio transport, no listening socket, no
+network call and no telemetry. It writes the MCP protocol to stdout and
+nothing to stderr, and `test/stdio.test.js` fails if anything else
+appears on either. A generated password goes to the calling client only.
+Randomness comes from Node.js `crypto` through jspassgen; the server adds
+none of its own. Dependencies are locked in `package-lock.json`, with the
+runtime ones pinned exactly. npm audit, CodeQL, OpenSSF Scorecard and
+Dependabot run on the repository, and every workflow action is pinned by
+commit SHA.
 
 ---
 
 ## Documentation
 
-- User manual: not written yet; this README is the reference until it is.
-- API reference: [`src/index.js`](src/index.js) and its JSDoc.
-- Developer docs: [DEVELOPMENT.md](DEVELOPMENT.md).
-- Ecosystem map: [jspassgen ADR 0001](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/adr/0001-ecosystem-lockstep.md).
+There is no rendered manual yet; this README and the files below are the
+reference.
+
+- [Developer documentation](DEVELOPMENT.md)
+- [Contributing guide](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
+- [Security policy](SECURITY.md)
+- [Support](SUPPORT.md)
+- [Governance](GOVERNANCE.md)
+- [API entry point](src/index.js)
+- [Ecosystem inventory](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/ecosystem.json)
+- [Ecosystem design (jspassgen ADR 0001)](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/adr/0001-ecosystem-lockstep.md)
 
 ---
 
 ## Stability guarantees
 
-- **Version axis.** `0.0.x`, moving by exactly `0.0.1` in lockstep with
-  the jspassgen suite. Before `1.0` any release may break; breaking
-  changes are called out in [CHANGELOG.md](CHANGELOG.md).
-- **Output stability.** A change to a tool's name, input schema or output
-  fields is a breaking change, even when no JavaScript API moves.
-- **Minimum toolchain.** Node.js 22, enforced by `engines` and tested in
-  CI. Raising it is a breaking change, made only in a release whose
-  CHANGELOG states the new floor and the reason.
+- Versions are `0.0.x` and move by exactly `0.0.1`, in lockstep with the
+  jspassgen suite.
+- Before `1.0` any release may break; [`CHANGELOG.md`](CHANGELOG.md)
+  calls out each breaking change.
+- A change to a tool's name, input schema or output fields is a breaking
+  change, even when no JavaScript API moves.
+- The Node.js floor is 22, enforced by `engines` and tested in CI. Raising
+  it is a breaking change, made only in a release whose changelog states
+  the new floor and the reason.
 
 ---
 
 ## License
 
-Dual-licensed under either the [Apache License, Version 2.0](LICENSE-APACHE)
-or the [MIT license](LICENSE-MIT), at your option. Unless you state
-otherwise, any contribution you submit is dual-licensed the same way,
-without additional terms.
+Licensed under either [Apache License 2.0](LICENSE-APACHE) or
+[MIT](LICENSE-MIT), at your option.
