@@ -22,10 +22,10 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and
   SECURITY and SUPPORT tables; move them together. Work for the next
   version happens on `feat/v<next-version>`; every other branch,
   Dependabot's included, lands on that branch, never on `main`.
-- **No publish workflow without the maintainer.** `private: true` was
-  removed for the first suite release, 0.0.22, on the maintainer's
-  instruction. Do not add a release or publish workflow without the
-  maintainer.
+- **Publishing is the maintainer's.** `private: true` was removed and
+  `release.yml` added for the first suite release, 0.0.22, on the
+  maintainer's instruction. Do not change how the package publishes
+  without the maintainer.
 - **No generation logic.** Every password, entropy figure and limit comes
   from `@sebastienrousseau/jspassgen`, pinned to an exact version. A new
   kind of password, or a change to how one is made, belongs in jspassgen.
