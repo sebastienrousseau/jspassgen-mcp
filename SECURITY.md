@@ -6,13 +6,12 @@
 
 This package follows the
 [jspassgen](https://github.com/sebastienrousseau/jspassgen) suite cadence.
-It has no release yet; the first is planned as `0.0.22`. While pre-`1.0`,
-the latest released `0.0.x` will receive security fixes; older ones will
-not.
+The latest release is `0.0.22`, its first. While pre-`1.0`, the latest
+released `0.0.x` receives security fixes; older ones do not.
 
 | Version | Status | Receives security fixes? |
 | :--- | :--- | :--- |
-| `0.0.22` | Planned, unreleased | Not yet released |
+| `0.0.22` | Latest release | Yes |
 | `main` | In development | Yes |
 
 ## Reporting a vulnerability

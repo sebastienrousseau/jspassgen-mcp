@@ -3,8 +3,8 @@
 # Lint (ESLint with the complexity ceilings, Prettier, Halstead
 # difficulty), npm audit, the mocha suite at 100% coverage on Node.js 22
 # and 24 with the example run over stdio, and the npm tarball listing.
-# Nothing here publishes: there is no release workflow until the first
-# suite release (DEVELOPMENT.md).
+# Nothing here publishes; release.yml does, from a signed tag
+# (DEVELOPMENT.md).
 name: CI
 
 on:

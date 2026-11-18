@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/sebastienrousseau/jspassgen-mcp/actions"><img src="https://img.shields.io/github/actions/workflow/status/sebastienrousseau/jspassgen-mcp/ci.yml?style=for-the-badge&logo=github" alt="Build" height="28" /></a>
-  <a href="https://www.npmjs.com/package/@sebastienrousseau/jspassgen-mcp"><img src="https://img.shields.io/badge/npm-not%20published%20yet-lightgrey?style=for-the-badge&color=fc8d62&logo=npm" alt="npm: not published yet" height="28" /></a>
+  <a href="https://www.npmjs.com/package/@sebastienrousseau/jspassgen-mcp"><img src="https://img.shields.io/npm/v/@sebastienrousseau/jspassgen-mcp?style=for-the-badge&color=fc8d62&logo=npm" alt="Registry" height="28" /></a>
   <a href="https://github.com/sebastienrousseau/jspassgen-mcp/blob/main/DEVELOPMENT.md"><img src="https://img.shields.io/badge/docs-development-blue?style=for-the-badge&labelColor=555555&logo=readthedocs" alt="Docs" height="28" /></a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/sebastienrousseau/jspassgen-mcp"><img src="https://img.shields.io/ossf-scorecard/github.com/sebastienrousseau/jspassgen-mcp?style=for-the-badge&label=OpenSSF%20Scorecard&logo=openssf" alt="OpenSSF Scorecard" height="28" /></a>
   <a href="LICENSE-APACHE"><img src="https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg?style=for-the-badge" alt="License: Apache-2.0 OR MIT" height="28" /></a>
@@ -29,7 +29,7 @@
 
 **Getting started**
 
-- [Install](#install): from a checkout; not on npm yet
+- [Install](#install): npm, `npx`, or a checkout
 - [Requirements](#requirements): Node.js floor, platforms, MCP client
 - [Quick Start](#quick-start): register the server with an MCP client
 
@@ -57,15 +57,6 @@
 
 ---
 
-## Development version
-
-This branch prepares unreleased v0.0.22, the first version of
-jspassgen-mcp. It is not on npm yet (`package.json` is marked `private`);
-run it from a checkout until it ships with the suite's first lockstep
-release.
-
----
-
 ## Install
 
 ### As a JavaScript library
@@ -75,6 +66,15 @@ that need passwords should depend on
 [`@sebastienrousseau/jspassgen`](https://www.npmjs.com/package/@sebastienrousseau/jspassgen)
 directly.
 
+### As an MCP server
+
+Install the `jspassgen-mcp` command globally, or let your MCP client
+start it with `npx` (see the Quick Start):
+
+```bash
+npm install -g @sebastienrousseau/jspassgen-mcp
+```
+
 Run the server from a checkout:
 
 ```bash
@@ -82,9 +82,6 @@ git clone https://github.com/sebastienrousseau/jspassgen-mcp.git
 cd jspassgen-mcp
 npm ci
 ```
-
-Once the suite's first lockstep release publishes it, it will install
-with `npm install @sebastienrousseau/jspassgen-mcp`.
 
 ---
 
@@ -108,18 +105,19 @@ with `npm install @sebastienrousseau/jspassgen-mcp`.
 {
   "mcpServers": {
     "jspassgen": {
-      "command": "node",
-      "args": ["/absolute/path/to/jspassgen-mcp/bin/jspassgen-mcp.js"]
+      "command": "npx",
+      "args": ["-y", "@sebastienrousseau/jspassgen-mcp"]
     }
   }
 }
 ```
 
-Add this entry to your MCP client's server configuration, with the path
-of your checkout. The client starts the server as a child process and
-talks to it over stdin and stdout; ask it for a password and it calls
-`generate_password`. To try the server without a client, run
-`node examples/generate-password.mjs 24`.
+Add this entry to your MCP client's server configuration. The client
+starts the server as a child process and talks to it over stdin and
+stdout; ask it for a password and it calls `generate_password`. From a
+checkout, set `"command"` to `"node"` and `"args"` to the absolute path
+of `bin/jspassgen-mcp.js`. To try the server without a client, run
+`node examples/generate-password.mjs 24` in a checkout.
 
 ---
 
@@ -147,10 +145,11 @@ conformance kit as its generators land.
 | [`jspassgen-sdk-cpp`](https://github.com/sebastienrousseau/jspassgen-sdk-cpp) | Native C++17 port on the OS CSPRNG | C++ programs |
 | [`jspassgen.github.io`](https://github.com/sebastienrousseau/jspassgen.github.io) | Source of [jspassgen.com](https://jspassgen.com) | Evaluating the suite |
 
-Only `@sebastienrousseau/jspassgen` is on a package registry so far
-(0.0.21 on npm). The table gives each member's purpose; the other members
-are early, each README's Capabilities at a glance says what works today,
-and they first publish with the suite's first lockstep release.
+Every member ships at 0.0.22, the suite's first lockstep release: the
+core, CLI, MCP and LSP servers on npm, the Python, Rust, Java and .NET
+SDKs on PyPI, crates.io, Maven Central and NuGet, and the C++ SDK and
+the site as GitHub releases. The table gives each member's purpose, and
+each README's Capabilities at a glance says what works today.
 
 ---
 
@@ -200,7 +199,7 @@ stdio.
 - The output is the password as text, and structured content with
   `password`, `length`, `entropyBits` and `securityLevel` as jspassgen
   computes them.
-- Every password comes from `@sebastienrousseau/jspassgen` 0.0.20 (pinned
+- Every password comes from `@sebastienrousseau/jspassgen` 0.0.22 (pinned
   exactly in `package.json`), type `strong`, drawn from Node.js `crypto`.
   The server has no generation logic of its own.
 - Invalid input is refused, not corrected: a non-integer, a string,
@@ -243,8 +242,6 @@ only option.
 - Wait for a later release if you need passphrases, entropy estimates for
   a configuration or strength analysis today. Only `generate_password`
   exists so far.
-- Run it from a checkout if you need it today. It is not on npm until the
-  suite's first lockstep release.
 - Generate locally with jspassgen if the password must not enter the AI
   conversation. The MCP client shows the result to the model and may keep
   it in the conversation history; that is inherent to calling a tool.

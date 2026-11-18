@@ -38,7 +38,7 @@ most one pull request targets `main` at a time: the release branch.
 
 ## Releases
 
-There is no release yet. Releases will follow the process in
+Releases follow the process in
 [DEVELOPMENT.md](DEVELOPMENT.md#release-model); only the maintainer
 pushes tags.
 
