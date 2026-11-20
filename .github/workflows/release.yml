@@ -127,7 +127,7 @@ jobs:
         if: steps.registry.outputs.published == 'false'
         env:
           TARBALL: ${{ needs.check.outputs.tarball }}
-        run: npm publish "release/${TARBALL}" --access public --tag latest --provenance --registry=https://registry.npmjs.org
+        run: npm publish "./release/${TARBALL}" --access public --tag latest --provenance --registry=https://registry.npmjs.org
       - name: Verify the version is public on npmjs
         if: steps.registry.outputs.published == 'false'
         env:
