@@ -8,8 +8,8 @@ advance in `0.0.1` steps in lockstep with the jspassgen suite.
 
 ## [0.0.23] - Unreleased
 
-The jspassgen suite's second lockstep version. The server, its tool and
-its dependency on `@sebastienrousseau/jspassgen` 0.0.22 are unchanged.
+The jspassgen suite's second lockstep version. The server and its tool
+are unchanged; they now run on `@sebastienrousseau/jspassgen` 0.0.23.
 
 ### Added
 
@@ -22,6 +22,11 @@ its dependency on `@sebastienrousseau/jspassgen` 0.0.22 are unchanged.
   run in `make check` and answer the OpenSSF Scorecard Fuzzing check.
 - `.github/CODEOWNERS` names the maintainer as owner of every file, so
   the `main` ruleset can require a code-owner review.
+
+### Changed
+
+- `@sebastienrousseau/jspassgen` is pinned to 0.0.23, the suite's
+  second lockstep release, in place of 0.0.22.
 
 ## [0.0.22] - 2026-11-18
 

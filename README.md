@@ -199,7 +199,7 @@ stdio.
 - The output is the password as text, and structured content with
   `password`, `length`, `entropyBits` and `securityLevel` as jspassgen
   computes them.
-- Every password comes from `@sebastienrousseau/jspassgen` 0.0.22 (pinned
+- Every password comes from `@sebastienrousseau/jspassgen` 0.0.23 (pinned
   exactly in `package.json`), type `strong`, drawn from Node.js `crypto`.
   The server has no generation logic of its own.
 - Invalid input is refused, not corrected: a non-integer, a string,

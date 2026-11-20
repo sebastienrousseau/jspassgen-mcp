@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2",
-    "@sebastienrousseau/jspassgen": "0.0.22",
+    "@sebastienrousseau/jspassgen": "0.0.23",
     "zod": "4.6.7"
   },
   "devDependencies": {
