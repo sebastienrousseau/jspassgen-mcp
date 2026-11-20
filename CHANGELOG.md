@@ -6,6 +6,23 @@ All notable changes to this project are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions
 advance in `0.0.1` steps in lockstep with the jspassgen suite.
 
+## [0.0.23] - Unreleased
+
+The jspassgen suite's second lockstep version. The server, its tool and
+its dependency on `@sebastienrousseau/jspassgen` 0.0.22 are unchanged.
+
+### Added
+
+- Property-based tests with fast-check 4.10.2
+  (`test/tools.property.test.js`) that call `generate_password` through
+  an MCP client with generated input: every length from 1 to 1024 gives
+  a base64 password of that length with 6 bits of entropy per
+  character, every other length value is refused with no password, and
+  the structured result always describes the password it carries. They
+  run in `make check` and answer the OpenSSF Scorecard Fuzzing check.
+- `.github/CODEOWNERS` names the maintainer as owner of every file, so
+  the `main` ruleset can require a code-owner review.
+
 ## [0.0.22] - 2026-11-18
 
 The first version of this repository, at the first jspassgen suite
