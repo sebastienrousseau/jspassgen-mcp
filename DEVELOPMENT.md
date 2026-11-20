@@ -20,7 +20,7 @@ saves exact versions and enforces `engines`.
 | `src/server.js` | `createServer()`: an `McpServer` with every tool registered |
 | `src/tools/generate-password.js` | The `generate_password` schema and handler, calling jspassgen's core service |
 | `src/index.js` | The public exports |
-| `test/` | mocha suites over an in-memory transport (`server.test.js`) and over real stdio (`stdio.test.js`) |
+| `test/` | mocha suites over an in-memory transport (`server.test.js`), fast-check property tests of the tool (`tools.property.test.js`), and over real stdio (`stdio.test.js`) |
 | `examples/` | Runnable MCP clients; CI runs each one |
 | `scripts/halstead.mjs` | The Halstead difficulty gate |
 | `scripts/readme-check.sh` | The README template check |
