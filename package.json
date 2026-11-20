@@ -1,6 +1,6 @@
 {
   "name": "@sebastienrousseau/jspassgen-mcp",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Local stdio Model Context Protocol server that generates passwords with @sebastienrousseau/jspassgen. Secrets go to the local client only and are never logged.",
   "author": "Sebastien Rousseau <sebastienrousseau@users.noreply.github.com>",
   "license": "Apache-2.0 OR MIT",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2",
-    "@sebastienrousseau/jspassgen": "0.0.22",
+    "@sebastienrousseau/jspassgen": "0.0.23",
     "zod": "4.6.7"
   },
   "devDependencies": {
@@ -42,6 +42,7 @@
     "eslint": "10.15.0",
     "eslint-plugin-sonarjs": "4.2.2",
     "espree": "11.2.0",
+    "fast-check": "4.10.2",
     "globals": "17.14.0",
     "mocha": "12.0.3",
     "prettier": "3.10.1"
