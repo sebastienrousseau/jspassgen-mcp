@@ -5,3 +5,6 @@
 [codespell]
 skip = ./.git,./node_modules,./coverage,./LICENSES,./package-lock.json,./KEYS.asc,./.github/demo.gif
 check-hidden = true
+# `intoto` is the in-toto attestation extension (.intoto.jsonl) the
+# release's provenance bundle must carry, not a misspelling of "into".
+ignore-words-list = intoto
