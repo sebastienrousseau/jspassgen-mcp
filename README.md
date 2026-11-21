@@ -145,7 +145,7 @@ conformance kit as its generators land.
 | [`jspassgen-sdk-cpp`](https://github.com/sebastienrousseau/jspassgen-sdk-cpp) | Native C++17 port on the OS CSPRNG | C++ programs |
 | [`jspassgen.github.io`](https://github.com/sebastienrousseau/jspassgen.github.io) | Source of [jspassgen.com](https://jspassgen.com) | Evaluating the suite |
 
-Every member ships at 0.0.23, the suite's second lockstep release: the
+Every member ships at 0.0.24, the suite's third lockstep release: the
 core, CLI, MCP and LSP servers on npm, the Python, Rust, Java and .NET
 SDKs on PyPI, crates.io, Maven Central and NuGet, and the C++ SDK and
 the site as GitHub releases. The table gives each member's purpose, and
@@ -199,7 +199,7 @@ stdio.
 - The output is the password as text, and structured content with
   `password`, `length`, `entropyBits` and `securityLevel` as jspassgen
   computes them.
-- Every password comes from `@sebastienrousseau/jspassgen` 0.0.23 (pinned
+- Every password comes from `@sebastienrousseau/jspassgen` 0.0.24 (pinned
   exactly in `package.json`), type `strong`, drawn from Node.js `crypto`.
   The server has no generation logic of its own.
 - Invalid input is refused, not corrected: a non-integer, a string,
